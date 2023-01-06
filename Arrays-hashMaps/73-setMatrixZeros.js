@@ -47,6 +47,7 @@ var setZeroes = function(matrix) {
             }
         }
     }
+    
     for(let i = 0; i < matrix.length; i++){
         if(rowsToZero[i] !== undefined){
             matrix[i] = zeroRow;
