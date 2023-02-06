@@ -31,3 +31,36 @@ var hasCycle = function(head) {
 
     return false;
 };
+
+
+
+// revision - 10 minutes
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+    if(head == null || head.next == null)return false;
+
+    let slowP = head.next;
+    let fastP = head.next.next;
+
+    while(true){
+        if(slowP == fastP){
+            return true;
+        } else if(slowP.next == null || fastP == null || fastP.next == null){
+            return false;
+        }
+
+        slowP = slowP.next;
+        fastP = fastP.next.next;
+    }
+};
