@@ -43,3 +43,40 @@ var invertTree = function(root) {
 
     }
 };
+
+// revision - 7-9 minutes
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var invertTree = function(root) {
+    if(!root)return root;
+
+    let queue = [];
+    let temp;
+
+    function levelTraversal(node){
+        if(!node)return;
+
+        temp = node.right;
+        node.right = node.left;
+        node.left = temp;
+
+        if(node.right)queue.push(node.right);
+        if(node.left)queue.push(node.left);
+
+         if(queue.length == 0)return;
+
+        return levelTraversal(queue.shift());
+    }
+    levelTraversal(root);
+    return root;
+};
