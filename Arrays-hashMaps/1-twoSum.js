@@ -18,3 +18,23 @@ var twoSum = function(nums, target) {
 
     }
 };
+
+// revision - up to 5 mins
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    let map = new Map();
+
+    for(let i = 0; i < nums.length; i++){
+        let val = map.get(target - nums[i]);
+
+        if(val === undefined){
+            map.set(nums[i], i);
+        } else {
+            return [i, val];
+        }
+    }
+};
