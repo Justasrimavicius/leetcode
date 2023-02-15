@@ -24,3 +24,32 @@ var letterCombinations = function(digits) {
     return ans;
 
 };
+
+// revision 12 minutes
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+    if(digits.length == 0)return [];
+
+    let ans = [];
+    let map = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz'];
+
+    // for(let i = 0; i < digits.length; i++){
+        combinations("", 0);
+    // }
+
+    function combinations(str, index){
+        if(str.length == digits.length || index == digits.length){
+            ans.push(str);
+            return;
+        }
+        for(let i = 0; i < map[digits[index]].length; i++){
+            combinations(str + map[digits[index]][i], index + 1);
+        }
+    }
+
+
+    return ans;
+};
