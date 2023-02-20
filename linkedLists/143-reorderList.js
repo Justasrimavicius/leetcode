@@ -57,3 +57,60 @@ var reorderList = function(head) {
 
 
 };
+
+
+
+// revision 35 minutes
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {void} Do not return anything, modify head in-place instead.
+ */
+var reorderList = function(head) {
+    if(!head.next)return head;
+    // first half(if unequal num. - more than the other half) is in original head, second half in secondHead
+    let slowP = head;
+    let fastP = head.next;
+
+    while(fastP && fastP.next){
+        slowP = slowP.next;
+        fastP = fastP.next.next;
+    }
+    secondHead = slowP.next;
+    slowP.next = null;
+
+    // inverse secondHead
+    let temp = null;
+    let prev = null;
+    while(secondHead){
+        temp = secondHead.next;
+        secondHead.next = prev;
+        prev = secondHead;
+        secondHead = temp;
+    }
+    secondHead = prev;
+
+    
+    // combine
+
+    let firstTemp;
+    let secondTemp;
+
+    while(secondHead){
+        firstTemp = head.next;
+        head.next = secondHead;
+        head = firstTemp;
+
+        secondTemp = secondHead.next;
+        secondHead.next = head;
+        secondHead = secondTemp;
+    }
+
+
+};
