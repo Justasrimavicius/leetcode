@@ -32,3 +32,46 @@ var copyRandomList = function(head) {
     }
     return map.get(head);
 };
+
+
+// revision 28 mins
+/**
+ * // Definition for a Node.
+ * function Node(val, next, random) {
+ *    this.val = val;
+ *    this.next = next;
+ *    this.random = random;
+ * };
+ */
+
+/**
+ * @param {Node} head
+ * @return {Node}
+ */
+var copyRandomList = function(head) {
+    if(!head)return head;
+
+    let map = new Map();
+    map.set(null, null);
+
+    let oldHeadCopy = head;
+    let tempNode;
+    while(oldHeadCopy){
+        tempNode = new Node(oldHeadCopy.val);
+        map.set(oldHeadCopy, tempNode);
+
+        oldHeadCopy = oldHeadCopy.next;
+    }
+
+    oldHeadCopy = head;
+
+    while(oldHeadCopy){
+        let newNode = map.get(oldHeadCopy);
+        newNode.random = map.get(oldHeadCopy.random);
+        newNode.next = map.get(oldHeadCopy.next);
+
+        oldHeadCopy = oldHeadCopy.next;
+    }
+
+    return map.get(head);
+};

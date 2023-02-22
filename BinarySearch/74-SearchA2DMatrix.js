@@ -67,3 +67,59 @@ var searchMatrix = function(matrix, target) {
         return false;
     }
 };
+
+
+
+//revision 20minutes
+/**
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
+var searchMatrix = function(matrix, target) {
+
+    let start = 0;
+    let end = matrix.length - 1;
+    let mid = end;
+
+    while(start < end){
+        mid = start + Math.floor((end - start + 1)/2);
+        if(target >= matrix[mid][0] && target <= matrix[mid][matrix[mid].length - 1]){
+            end = mid;
+            break;
+        } else {
+            
+            if(target < matrix[mid][0]){
+                end = mid - 1;
+            } else {
+                start = mid;
+            }
+        }
+    }
+    if(target < matrix[end][0] || target > matrix[end][matrix[end].length - 1])return false;
+    // end is the row needed.
+    let row = end;
+
+    start = 0;
+    end = matrix[row].length - 1;
+    mid = end;
+
+    while(start < end){
+        mid = start + Math.floor((end - start + 1)/2);
+
+        if(target == matrix[row][mid]){
+            return true;
+        } else {
+            
+            if(target < matrix[row][mid]){
+                end = mid - 1;
+            } else {
+                start = mid;
+            }
+
+        }
+    }
+
+    if(matrix[row][end] == target)return true;
+    return false;
+};
