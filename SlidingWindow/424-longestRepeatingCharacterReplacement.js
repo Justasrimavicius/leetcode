@@ -45,3 +45,50 @@ var characterReplacement = function(s, k) {
 
     return longestLength;
 };
+
+// revision
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
+var characterReplacement = function(s, k) {
+    let map = new Map();
+    for(let i = 65; i <= 90; i++){
+        map.set(String.fromCharCode(i), 0);
+    }
+
+    let longestLength = 0;
+    let longestLetter = [0, '-'];
+    let leftP = 0;
+    let rightP = 0;
+    // AA BABBA //
+    while(rightP < s.length){
+        let val = map.get(s[rightP]);
+        map.set(s[rightP], val + 1);
+        
+
+
+        if(val + 1 > longestLetter[0]){
+            longestLetter[0] = val + 1;
+            longestLetter[1] = s[rightP];
+            
+        }
+
+        while(rightP - leftP + 1 - longestLetter[0] > k){
+            let temp = map.get(s[leftP]);
+            map.set(s[leftP], temp - 1);
+
+            leftP++;
+        }  
+
+        if(rightP - leftP + 1 > longestLength)longestLength = rightP - leftP + 1;
+
+
+
+        rightP++;
+
+    }
+    return longestLength;
+
+};
