@@ -19,3 +19,27 @@ var permute = function(nums) {
     bt([], nums);
     return output;
 }
+
+// revision 5 minutes
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+    let ans = [];
+
+    function recursion(arr, startingArr){
+        if(arr.length == nums.length){
+            ans.push(arr);
+            return;
+        }
+
+        for(let i = 0; i < startingArr.length; i++){
+            recursion([...arr, startingArr[i]], [...startingArr.slice(0, i), ...startingArr.slice(i + 1)]);
+        }
+
+    }
+    recursion([], nums);
+
+    return ans;
+};
